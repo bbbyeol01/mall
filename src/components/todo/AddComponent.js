@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { postAdd } from "../../api/todoApi";
 import ResultModal from "../common/ResultModal";
+import useCustomMove from "../../hooks/useCustomMove";
 
 const initState = {
   title: "",
@@ -13,7 +14,9 @@ const AddComponent = () => {
 
   const [result, setResult] = useState(null);
 
-  const handelChangeTodo = (e) => {
+  const { moveToList } = useCustomMove();
+
+  const handleChangeTodo = (e) => {
     todo[e.target.name] = e.target.value;
     setTodo({ ...todo });
   };
@@ -34,6 +37,7 @@ const AddComponent = () => {
 
   const closeModal = () => {
     setResult(null);
+    moveToList(); // 모달 닫으면 목록으로 이동
   };
 
   return (
@@ -57,7 +61,7 @@ const AddComponent = () => {
             name="title"
             type={"text"}
             value={todo.title}
-            onChange={handelChangeTodo}
+            onChange={handleChangeTodo}
           ></input>
         </div>
       </div>
@@ -70,7 +74,7 @@ const AddComponent = () => {
             name="writer"
             type={"text"}
             value={todo.writer}
-            onChange={handelChangeTodo}
+            onChange={handleChangeTodo}
           ></input>
         </div>
       </div>
@@ -83,7 +87,7 @@ const AddComponent = () => {
             name="dueDate"
             type={"date"}
             value={todo.dueDate}
-            onChange={handelChangeTodo}
+            onChange={handleChangeTodo}
           ></input>
         </div>
       </div>
