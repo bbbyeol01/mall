@@ -1,47 +1,47 @@
-import { useCallback } from "react";
+// import { useCallback } from "react";
 import {
-  createSearchParams,
-  useNavigate,
+  // createSearchParams,
+  // useNavigate,
   useParams,
-  useSearchParams,
+  // useSearchParams,
 } from "react-router-dom";
+import ReadComponent from "../../components/todo/ReadComponent";
 
 function ReadPage() {
   const { tno } = useParams();
 
-  const navigate = useNavigate();
+  // ReadComponent가 필요한 기능을 useCustomMove를 이용해서 처리할 수 있으므로, 기존의 useNavigate를 이용하는 코드를 삭제할 수 있음.
+  // const navigate = useNavigate();
 
-  const [queryParams] = useSearchParams();
+  // const [queryParams] = useSearchParams();
 
-  const page = queryParams.get("page") ? parseInt(queryParams.get("page")) : 1;
-  const size = queryParams.get("size") ? parseInt(queryParams.get("size")) : 10;
+  // const page = queryParams.get("page") ? parseInt(queryParams.get("page")) : 1;
+  // const size = queryParams.get("size") ? parseInt(queryParams.get("size")) : 10;
 
-  const queryStr = createSearchParams({ page, size }).toString();
+  // const queryStr = createSearchParams({ page, size }).toString();
 
-  const moveToModify = useCallback(
-    (tno) => {
-      navigate({
-        pathname: `/todo/modify/${tno}`,
-        search: queryStr,
-      });
-    },
-    [tno, page, size]
-  );
+  // const moveToModify = useCallback(
+  //   (tno) => {
+  //     navigate({
+  //       pathname: `/todo/modify/${tno}`,
+  //       search: queryStr,
+  //     });
+  //   },
+  //   [tno, page, size]
+  // );
 
-  const moveToList = useCallback(() => {
-    navigate({
-      pathname: `/todo/list`,
-      search: queryStr,
-    });
-  }, [page, size]);
+  // const moveToList = useCallback(() => {
+  //   navigate({
+  //     pathname: `/todo/list`,
+  //     search: queryStr,
+  //   });
+  // }, [page, size]);
 
   return (
-    <div className="text-3xl font-extrabold">
-      Todo Read Page Component {tno}
-      <div>
-        <button onClick={() => moveToModify(tno)}>Test Modify</button>
-        <button onClick={() => moveToList()}>Test List</button>
-      </div>
+    <div className="font-extrabold w-full bg-white mt-6">
+      <div className="text-2xl">Todo Read Page Component {tno}</div>
+
+      <ReadComponent tno={tno}></ReadComponent>
     </div>
   );
 }
