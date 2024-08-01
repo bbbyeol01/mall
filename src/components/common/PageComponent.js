@@ -4,9 +4,9 @@ const PageComponent = ({ serverData, movePage }) => {
       {serverData.prev ? (
         <div
           onClick={() => movePage({ page: serverData.prevPage })}
-          className="m-2 p-2 w-16 text-center font-bold text-blue-400"
+          className="m-2 p-2 w-12 text-center bg-blue-400 rounded text-white"
         >
-          Prev
+          {"<"}
         </div>
       ) : (
         <></>
@@ -25,7 +25,12 @@ const PageComponent = ({ serverData, movePage }) => {
       ))}
 
       {serverData.next ? (
-        <div onClick={() => movePage({ page: serverData.nextPage })}>Next</div>
+        <div
+          className="m-2 p-2 w-12 text-center bg-blue-400 rounded text-white"
+          onClick={() => movePage({ page: serverData.nextPage })}
+        >
+          {">"}
+        </div>
       ) : (
         <></>
       )}
